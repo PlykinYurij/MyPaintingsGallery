@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/MyPaintingsGallery/static/css/main.6f61219e.css",
+    "main.js": "/MyPaintingsGallery/static/js/main.e83a0335.js",
+    "static/media/loader.gif": "/MyPaintingsGallery/static/media/loader.ce74ef2de690b31030ff.gif",
+    "index.html": "/MyPaintingsGallery/index.html",
+    "main.6f61219e.css.map": "/MyPaintingsGallery/static/css/main.6f61219e.css.map",
+    "main.e83a0335.js.map": "/MyPaintingsGallery/static/js/main.e83a0335.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f61219e.css",
+    "static/js/main.e83a0335.js"
+  ]
+}
