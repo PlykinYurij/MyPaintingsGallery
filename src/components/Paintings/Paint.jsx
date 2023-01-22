@@ -1,10 +1,11 @@
 import React from "react";
 import "./Paint.scss"
+import altPaint from "../../images/altPaint.jpg"
 
 const Paint = ({ paint, autor, location }) => {
     return <div className={"wrapperPaint"}>
         <div className={"containerPaint"}>
-            <img className={"paint"} src={`https://test-front.framework.team/${paint.imageUrl}`} />
+            <img className={"paint"} src={`https://test-front.framework.team/${paint.imageUrl}`} alt={"iconPaint"} />
             <div className={"containerPaintName"}>
                 <div className={"paintName"}>{paint.name}</div>
                 <div className={"containerHoverDescriptions"}>
