@@ -19,7 +19,13 @@
     font-size: 16px !important;
     line-height: 20px !important;
     text-align: left !important;
+    background-color: transparent !important;
+
+    &--is-focused {
+      border: 1px solid #000 !important;
+    } 
   }
+
   &__indicator-separator {
     display: none !important;
   }
@@ -34,6 +40,7 @@
     margin: 0 !important;
     border-radius: 8px !important;
     border: 1px solid #000 !important;
+
   }
   &__option {
     cursor: pointer !important;
@@ -45,6 +52,12 @@
     &--is-selected {
       background-color: rgb(0, 0, 0, 0.3) !important;
     }
-
   }
 }
+
+// .css-t3ipsp-control {
+//   box-shadow: 0 0 0 1px #000;
+// }
+// .css-t3ipsp-control:hover {
+//   border-color: yellow;
+// }

@@ -1,6 +1,5 @@
 import React from "react";
 import "./Paint.scss"
-import altPaint from "../../images/altPaint.jpg"
 
 const Paint = ({ paint, autor, location }) => {
     return <div className={"wrapperPaint"}>
@@ -11,7 +10,7 @@ const Paint = ({ paint, autor, location }) => {
                 <div className={"containerHoverDescriptions"}>
                     <div className={"hoverDescription"}>
                         <span className={"hoverName"}>{`Author: `}</span>
-                        <span className={"hoverValue"}>{autor[0].name}</span>
+                        <span className={"hoverValue"}>{autor.name}</span>
                     </div>
                     <div className={"hoverDescription"}>
                         <span className={"hoverName"}>{`Creared: `}</span>
@@ -19,7 +18,7 @@ const Paint = ({ paint, autor, location }) => {
                     </div>
                     <div className={"hoverDescription"}>
                         <span className={"hoverName"}>{`Location: `}</span>
-                        <span className={"hoverValue"}>{location[0].location}</span>
+                        <span className={"hoverValue"}>{location.location}</span>
                     </div>
                 </div>
             </div>

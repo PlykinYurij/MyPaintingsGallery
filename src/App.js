@@ -7,8 +7,6 @@ import cn from "classnames"
 function App() {
   const [isDark, setIsDark] = useState(false)
 
-  console.log(isDark)
-
   return (
     <IsDarkContext.Provider value={{
       isDark,

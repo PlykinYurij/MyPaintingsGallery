@@ -1,10 +1,20 @@
-.wrapperIconSun img {
-    width: 25px;
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    cursor: pointer;
+.containerHeader{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 35px 0;
+    .wrapperIconFwt {
+        cursor: pointer;
+    }
+    .wrapperIconSun {
+        img {
+            width: 25px;
+            cursor: pointer;
+        }
+    }
 }
+
 .containerPaints {
     text-align: center;
     display: flex;
@@ -43,6 +53,9 @@
     .selectContainer {
         width: 20%;
         height: 45px;
+        .darkPN {
+            border: 1px solid white;
+        }
 
         @media(max-width: 600px) {
             width: 80%;
@@ -62,6 +75,9 @@
         font-size: 16px;
         box-sizing: border-box;
         border: 1px solid #000000;
+        .darkPN {
+            border: 1px solid white;
+        }
     }
 
     .containerCreated {
@@ -126,6 +142,8 @@
     height: 275px;
     position: relative;
     cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
 
     @media(max-width: 1024px) {
         width: 300px;
@@ -145,8 +163,6 @@
     .paint {
         width: 360px;
         height: 275px;
-        border-radius: 20px;
-        object-fit: cover;
 
         @media(max-width: 1024px) {
             width: 300px;
@@ -208,16 +224,17 @@
 }
 
 .pagesWrapper {
+    border: 1px solid #000000;
+    border-radius: 8px;
+    margin: 40px 0 100px 0;
+
     .containerPages {
         font-family: 'Roboto', sans-serif;
         display: flex;
-        border: 1px solid #000000;
-        border-radius: 8px;
         font-size: 18px;
         font-weight: 500;
         line-height: 20px;
     }
-
     .page {
         cursor: pointer;
         border: none;
@@ -253,8 +270,4 @@
         background-color: #fff;
         color: #000;
     }
-
-
-
-
 }
