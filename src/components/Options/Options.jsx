@@ -61,8 +61,18 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
         setTotalPages(1)
     }
 
+    const handleClickForm = (event) => {
+        event.stopPropagation()
+        setCreatedFormActive(true)
+    }
+
+    const handleClickWindow = () => {
+        setCreatedFormActive(false)
+    }
+
     const classActiveCreatedForm = createdFormActive ? "createdFormActive" : " "
     const classesCreatedFormArray = ["containerCreatedForm", classActiveCreatedForm]
+    window.addEventListener("click", handleClickWindow)
 
         return <div className={"optionsContainer"}>
         <div className={cn("selectContainer", {
@@ -99,15 +109,14 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
         <div className={"selectContainer"}>
             <div className={cn("containerCreated", {
                 darkPN: isDark === true,
-            })}>
+            })} onClick={event => handleClickForm(event)}>
                 <div className={cn("containerCreatedDescription", {
                     darkPN: isDark === true,
                 })}>
-                    <div>
+                    <div className="createdFormText">
                         Created
-
                     </div>
-                    <button className={"btnCreatedForm"} onClick={() => setCreatedFormActive(!createdFormActive)}>
+                    <button className={"btnCreatedForm"}>
                         {createdFormActive ? "∨" : "∧"}
                     </button>
 

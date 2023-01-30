@@ -48,7 +48,59 @@
     justify-content: space-around;
     flex-wrap: wrap;
     flex: 0, 1, 11, 1111%;
-    margin-bottom: 45px;
+    margin-bottom: 80px;
+
+    .select-castom{
+        &__control {
+          width: 100% !important;
+          height: 45px !important;
+          border-radius: 8px !important;
+          border: 1px solid #000 !important;
+          font-family: 'Roboto' !important;
+          font-style: normal !important;
+          font-weight: 500 !important;
+          font-size: 16px !important;
+          line-height: 20px !important;
+          text-align: left !important;
+          background-color: transparent !important;
+          position: relative;
+      
+          &--is-focused {
+            border: 1px solid #000 !important;
+          } 
+        }
+      
+        &__indicator-separator {
+          display: none !important;
+        }
+        &__indicator {
+          padding: 8px 0px 8px 0px !important;
+        }
+        &__indicators {
+          cursor: pointer !important;
+        }
+        &__menu {
+          text-align: left !important;
+          margin: 0 !important;
+          border-radius: 8px !important;
+          border: 1px solid #000 !important;
+        }
+        &__menu-list {
+          background-color: #fff;
+          color: black;
+        }
+        &__option {
+          cursor: pointer !important;
+          &--is-focused {
+            background-color: #000 !important;
+            color: white !important;
+          }
+      
+          &--is-selected {
+            background-color: rgb(0, 0, 0, 0.3) !important;
+          }
+        }
+      }
 
     .selectContainer {
         width: 20%;
@@ -90,7 +142,6 @@
         border: 1px solid #000000;
         min-height: 45px;
         position: relative;
-        z-index: 3;
         background-color: #fff;
     }
 
@@ -109,6 +160,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .createdFormText {
+        color: rgb(168, 168, 168, 0.8);
+        margin-left: 10px;
+        
     }
 
     .inputContainerForm {
@@ -144,6 +201,7 @@
     cursor: pointer;
     border-radius: 20px;
     overflow: hidden;
+    z-index: 0;
 
     @media(max-width: 1024px) {
         width: 300px;
