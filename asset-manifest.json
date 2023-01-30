@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/MyPaintingsGallery/static/css/main.bec20b78.css",
-    "main.js": "/MyPaintingsGallery/static/js/main.b1b7660d.js",
+    "main.css": "/MyPaintingsGallery/static/css/main.9a87e04c.css",
+    "main.js": "/MyPaintingsGallery/static/js/main.52253cab.js",
     "static/media/loader.gif": "/MyPaintingsGallery/static/media/loader.ce74ef2de690b31030ff.gif",
     "index.html": "/MyPaintingsGallery/index.html",
-    "main.bec20b78.css.map": "/MyPaintingsGallery/static/css/main.bec20b78.css.map",
-    "main.b1b7660d.js.map": "/MyPaintingsGallery/static/js/main.b1b7660d.js.map"
+    "main.9a87e04c.css.map": "/MyPaintingsGallery/static/css/main.9a87e04c.css.map",
+    "main.52253cab.js.map": "/MyPaintingsGallery/static/js/main.52253cab.js.map"
   },
   "entrypoints": [
-    "static/css/main.bec20b78.css",
-    "static/js/main.b1b7660d.js"
+    "static/css/main.9a87e04c.css",
+    "static/js/main.52253cab.js"
   ]
 }
