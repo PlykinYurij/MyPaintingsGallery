@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { paintingsApi } from "../../API/api"
 import Paint from "./Paint"
 import Loader from "../Loader/Loader"
@@ -11,6 +11,8 @@ import Header from "../Header/Header"
 import Pagination from "../Pagination/Pagination"
 import Options2 from "../Options/Options2"
 import useDebounce from "../../hooks/useDebounce"
+import { IsDarkContext } from "../../context"
+import cn from "classnames"
 
 const PaintingContainer = () => {
     const [paintings, setPaintings] = useState([])
@@ -23,6 +25,8 @@ const PaintingContainer = () => {
     const [searchQuery, setSearchQuery] = useState("")
     const [selectedAuthor, setSelectedAuthor] = useState("")
     const [selectedLocation, setSelectedLocation] = useState("")
+
+    const { isDark } = useContext(IsDarkContext)
 
     const [fetchAutors, errorAutors, loadingAutors] = useFetching(async () => {
         const response = await paintingsApi.getAuthors()
@@ -90,7 +94,9 @@ const PaintingContainer = () => {
 
             <div className="containerPaints">
                 {paintings.length === 0 && !loadingPaintings && !errorPaintings
-                    && <div className="textNoPainting">No painting found</div>}
+                    && <div className={cn("textNoPainting", {
+                        darkNo: isDark,
+                    })}>No paintings found</div>}
 
                 {paintings && paintings
                     .map(paint => <div className="containerWrapperPaint"
