@@ -5,11 +5,11 @@ import iconSunBlack from "../../images/VectorBlack.png"
 import iconFtw from "../../images/IconFwtWhiteTheme.png"
 
 
-const Header = ({setfilteredPaintsArray}) => {
+const Header = ({removeFilters}) => {
     const { isDark, setIsDark } = useContext(IsDarkContext)
 
     return <div className="containerHeader">
-        <div className="wrapperIconFwt" onClick={() => setfilteredPaintsArray([])}>
+        <div className="wrapperIconFwt" onClick={() => removeFilters()}>
             <img src={iconFtw} alt="icon" />
         </div>
         <div className="wrapperIconSun" onClick={() => setIsDark(!isDark)}>

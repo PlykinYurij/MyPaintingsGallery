@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { launchesApi } from "../../API/api"
+import { paintingsApi } from "../../API/api"
 import Paint from "./Paint"
 import Loader from "../Loader/Loader"
 import Error from "../Error/Error"
@@ -8,8 +8,9 @@ import "./Paint.scss"
 import { getPagesArray, getPagesCount } from "../../utils/pages/pages"
 import '../../App.scss';
 import Header from "../Header/Header"
-import Options from "../Options/Options"
 import Pagination from "../Pagination/Pagination"
+import Options2 from "../Options/Options2"
+import useDebounce from "../../hooks/useDebounce"
 
 const PaintingContainer = () => {
     const [paintings, setPaintings] = useState([])
@@ -18,24 +19,35 @@ const PaintingContainer = () => {
     const [totalPages, setTotalPages] = useState(0)
     const [limit, setLimit] = useState(12)
     const [page, setPage] = useState(1)
-    const [filteredPaintsArray, setfilteredPaintsArray] = useState([])
+    const [valueInput, setValueInput] = useState("")
+    const [searchQuery, setSearchQuery] = useState("")
+    const [selectedAuthor, setSelectedAuthor] = useState("")
+    const [selectedLocation, setSelectedLocation] = useState("")
 
     const [fetchAutors, errorAutors, loadingAutors] = useFetching(async () => {
-        const response = await launchesApi.getAuthors()
+        const response = await paintingsApi.getAuthors()
         setAutors(response.data)
     })
 
     const [fetchLocations, errorLocations, loadingLocations] = useFetching(async () => {
-        const response = await launchesApi.getLocations()
+        const response = await paintingsApi.getLocations()
         setLocations(response.data)
     })
 
     const [fetchPaintings, errorPaintings, loadingPaintings] = useFetching(async () => {
-        const response = await launchesApi.getPaintings(limit, page)
+        const response = await paintingsApi.getPaintings(limit, page, searchQuery, selectedAuthor, selectedLocation)
         setPaintings(response.data)
         const totalCount = response.headers["x-total-count"]
         setTotalPages(getPagesCount(totalCount, limit))
     })
+
+    const debouncedSearch = useDebounce(setSearchQuery, 500)
+
+    const onChangeSearchQuery = (event) => {
+        setPage(1)
+        setValueInput(event.target.value)
+        debouncedSearch(event.target.value)
+    }
 
     useEffect(() => {
         fetchAutors()
@@ -43,28 +55,45 @@ const PaintingContainer = () => {
     }, [])
 
     useEffect(() => {
-        fetchPaintings(limit, page)
-    }, [page])
+        fetchPaintings()
+    }, [page, searchQuery, selectedAuthor, selectedLocation])
 
     const pagesArray = getPagesArray(totalPages)
 
-    const filteredAndSearchQuerryArray = filteredPaintsArray.length > 0 ? filteredPaintsArray : paintings
+    const removeFilters = () => {
+        setValueInput("")
+        setSearchQuery("")
+        setSelectedAuthor("")
+        setSelectedLocation("")
+    }
 
     return (
-        <div className={"wrapperPaintingContainer"}>
-            <Header setfilteredPaintsArray={setfilteredPaintsArray} />
-            <Options
+        <div className="wrapperPaintingContainer">
+            <Header removeFilters={removeFilters} />
+
+            <Options2
+                valueInput={valueInput}
+                setValueInput={setValueInput}
+                onChangeSearchQuery={onChangeSearchQuery}
+                selectedAuthor={selectedAuthor}
+                setSelectedAuthor={setSelectedAuthor}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
                 autors={autors}
                 locations={locations}
-                setTotalPages={setTotalPages}
-                setfilteredPaintsArray={setfilteredPaintsArray}
+                setPage={setPage}
             />
 
-            <div className={"containerPaints"}>
-                {loadingPaintings && <Loader />}
-                {errorPaintings && <Error>{errorPaintings}</Error>}
-                {filteredAndSearchQuerryArray && filteredAndSearchQuerryArray
-                    .map(paint => <div className={"containerWrapperPaint"}
+            {loadingPaintings && <Loader />}
+
+            {errorPaintings && <Error>{errorPaintings}</Error>}
+
+            <div className="containerPaints">
+                {paintings.length === 0 && !loadingPaintings && !errorPaintings
+                    && <div className="textNoPainting">No painting found</div>}
+
+                {paintings && paintings
+                    .map(paint => <div className="containerWrapperPaint"
                         key={paint.id}>
                         <Paint paint={paint}
                             autor={autors.filter(autor => autor.id === paint.authorId)}
@@ -72,12 +101,14 @@ const PaintingContainer = () => {
                         />
                     </div>)}
             </div>
-            <Pagination
+
+            {paintings.length > 0 && <Pagination
                 page={page}
                 pagesArray={pagesArray}
                 totalPages={totalPages}
                 setPage={setPage}
-            />
+            />}
+
         </div>
     )
 }

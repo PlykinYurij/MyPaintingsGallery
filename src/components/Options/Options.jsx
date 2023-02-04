@@ -94,6 +94,7 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
                 onChange={event => changeSelectedAndQuery("authorId", event)}
                 options={autors.map(autor => ({ value: autor.id, label: autor.name }))}
                 placeholder="Author"
+                isC
             />
         </div>
         <div className={cn("selectContainer", {
@@ -104,6 +105,7 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
                 onChange={event => changeSelectedAndQuery("locationId", event)}
                 options={locations.map(location => ({ value: location.id, label: location.location }))}
                 placeholder="Location"
+                isClearable={true}
             />
         </div>
         <div className={"selectContainer"}>

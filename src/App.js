@@ -13,7 +13,7 @@ function App() {
       setIsDark
     }}>
       <div className={cn("App", {
-        dark: isDark === true,
+        dark: isDark,
       })}
       >
         <PaintingContainer />

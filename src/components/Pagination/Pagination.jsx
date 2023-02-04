@@ -6,17 +6,17 @@ const Pagination = ({page, pagesArray, totalPages, setPage}) => {
     const { isDark } = useContext(IsDarkContext)
     return <div className={"pagesWrapper"}>
         <div className={cn("containerPages", {
-            darkPN: isDark === true
+            darkPN: isDark
         })}>
             <button className={cn("page", {
-                darkPN: isDark === true
+                darkPN: isDark
             })} onClick={() => setPage(1)} disabled={page === 1}>
                 <div className={"textPage"}>
                     {"«"}
                 </div>
             </button>
             <button className={cn("page", {
-                darkPN: isDark === true
+                darkPN: isDark
             })} onClick={() => setPage(page - 1)} disabled={page === 1}>
                 <div className={"textPage"}>
                     {"‹"}
@@ -25,24 +25,24 @@ const Pagination = ({page, pagesArray, totalPages, setPage}) => {
             {pagesArray.map(p => <button
                 onClick={() => setPage(p)}
                 className={page === p ? cn("pageActive", {
-                    darkPageActive: isDark === true
+                    darkPageActive: isDark
                 }) : cn("page", {
-                    darkPN: isDark === true
+                    darkPN: isDark
                 })}
                 key={p}>
-                <div className={"textPage"}>{p}</div>
+                <div className="textPage">{p}</div>
             </button>)}
             <button className={cn("page", {
-                darkPN: isDark === true
+                darkPN: isDark
             })} onClick={() => setPage(page + 1)} disabled={page === totalPages}>
-                <div className={"textPage"}>
+                <div className="textPage">
                     {"›"}
                 </div>
             </button>
             <button className={cn("lastChildPage", {
-                darkPN: isDark === true
+                darkPN: isDark
             })} onClick={() => setPage(totalPages)} disabled={page === totalPages}>
-                <div className={"textPage"}>
+                <div className="textPage">
                     {"»"}
                 </div>
             </button>
