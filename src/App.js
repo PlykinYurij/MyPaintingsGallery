@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.scss';
-import PaintingContainer from './components/Paintings/PaintingsContainer';
-import { IsDarkContext } from './context';
+import PaintingContainer from './components/Paintings/PaintingsContainer'
+import { IsDarkContext } from './context/IsDarkContext'
 import cn from "classnames"
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       isDark,
       setIsDark
     }}>
-      <div className={cn("App", {
+      <div className={cn("app", {
         dark: isDark,
       })}
       >
@@ -20,7 +20,7 @@ function App() {
       </div>
     </IsDarkContext.Provider>
 
-  );
+  )
 }
 
-export default App;
+export default App

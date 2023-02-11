@@ -1,64 +1,38 @@
-import React, { useContext, useEffect, useState } from "react"
-import { IsDarkContext } from "../../context"
-import Select from 'react-select'
+import React, { useContext, useState } from "react"
+import { IsDarkContext } from "../../context/IsDarkContext"
 import cn from "classnames"
-import { useFetching } from "../../hooks/useFetching"
-import { launchesApi } from "../../API/api"
+import Select from 'react-select'
 
 
-const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => {
+const Options2 = ({ 
+    valueInput, 
+    onChangeSearchQuery, 
+    setSelectedAuthor, 
+    setSelectedLocation, 
+    autors, 
+    locations, 
+    setPage,
+    fromCreated,
+    beforeCreated,
+    setFromCreated,
+    setBeforeCreated
+ }) => {
     const { isDark } = useContext(IsDarkContext)
-    const [searchQuery, setSearchQuery] = useState("")
-    const [fromCreated, setFromCreated] = useState("")
-    const [beforeCreated, setBeforeCreated] = useState("")
     const [createdFormActive, setCreatedFormActive] = useState(false)
-    const [selectedFilteredPaints, setSelectedFilterPaints] = useState("")
-    const [query, setQuery] = useState("q")
 
-    const [fetchPeriod, errorPeriod, loadingPeriod] = useFetching(async () => {
-        const response = await launchesApi.getCreated(fromCreated, beforeCreated)
-        setfilteredPaintsArray(response.data)
-    })
-
-    const [fetchFilteredPaintsArray, errorFilteredPaintsArray, loadingFilteredPaintsArray] = useFetching(async () => {
-        const response = await launchesApi.getFilteredOrSearchQuerryPaints(query, selectedFilteredPaints)
-        setfilteredPaintsArray(response.data)
-    })
-
-    useEffect(() => {
-        fetchFilteredPaintsArray()
-    }, [selectedFilteredPaints])
-
-    useEffect(() => {
-        fetchPeriod()
-    }, [fromCreated, beforeCreated])
-
-    const changeSelectedAndQuery = (query, event) => {
-        setQuery(query)
-        setSelectedFilterPaints(event.value)
-        setTotalPages(1)
-    }
-
-    const changeSearchQuery = (query, event) => {
-        setQuery(query)
-        setSearchQuery(event.target.value)
-        setSelectedFilterPaints(event.target.value)
-        setTotalPages(1)
+    const onChahgeSelected = (callback, event) => {
+        setPage(1)
+        callback(event)
     }
 
     const changeFromCreated = (event) => {
         setFromCreated(event.target.value)
-        setTotalPages(1)
-        if (beforeCreated === "") {
-            return setBeforeCreated(2023)
-        } else {
-            return beforeCreated
-        }
+        setPage(1)
     }
 
     const changeBeforeCreated = (event) => {
         setBeforeCreated(event.target.value)
-        setTotalPages(1)
+        setPage(1)
     }
 
     const handleClickForm = (event) => {
@@ -74,40 +48,42 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
     const classesCreatedFormArray = ["containerCreatedForm", classActiveCreatedForm]
     window.addEventListener("click", handleClickWindow)
 
-        return <div className={"optionsContainer"}>
+    return <div className="optionsContainer">
         <div className={cn("selectContainer", {
-            darkPN: isDark === true,
+            darkPN: isDark,
         })}>
-            <input value={searchQuery}
+            <input value={valueInput}
                 placeholder={"name"}
-                onChange={event => changeSearchQuery("q", event)}
+                onChange={event => onChangeSearchQuery(event)}
                 className={cn("inputSearchQuery", {
-                    darkPN: isDark === true,
+                    darkPN: isDark,
                 })}
             />
         </div>
         <div className={cn("selectContainer", {
-            darkPN: isDark === true,
-        })}>
-            <Select
-                classNamePrefix={"select-castom"}
-                onChange={event => changeSelectedAndQuery("authorId", event)}
-                options={autors.map(autor => ({ value: autor.id, label: autor.name }))}
-                placeholder="Author"
-                isC
-            />
-        </div>
-        <div className={cn("selectContainer", {
-            darkPN: isDark === true,
+            darkPN: isDark,
         })}>
             <Select
                 classNamePrefix="select-castom"
-                onChange={event => changeSelectedAndQuery("locationId", event)}
+                onChange={event => onChahgeSelected(setSelectedAuthor, event?.value)}
+                options={autors.map(autor => ({ value: autor.id, label: autor.name }))}
+                placeholder="Author"
+                isClearable={true}
+            />
+        </div>
+
+        <div className={cn("selectContainer", {
+            darkPN: isDark,
+        })}>
+            <Select
+                classNamePrefix="select-castom"
+                onChange={event => onChahgeSelected(setSelectedLocation, event?.value)}
                 options={locations.map(location => ({ value: location.id, label: location.location }))}
                 placeholder="Location"
                 isClearable={true}
             />
         </div>
+
         <div className={"selectContainer"}>
             <div className={cn("containerCreated", {
                 darkPN: isDark === true,
@@ -146,7 +122,8 @@ const Options = ({autors, locations, setTotalPages, setfilteredPaintsArray}) => 
 
             </div>
         </div>
+
     </div>
 }
 
-export default Options
+export default Options2

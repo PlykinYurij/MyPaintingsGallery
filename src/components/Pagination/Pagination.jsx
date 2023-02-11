@@ -1,9 +1,10 @@
 import React, { useContext } from "react"
-import { IsDarkContext } from "../../context"
+import { IsDarkContext } from "../../context/IsDarkContext"
 import cn from "classnames"
 
 const Pagination = ({page, pagesArray, totalPages, setPage}) => {
     const { isDark } = useContext(IsDarkContext)
+    
     return <div className={"pagesWrapper"}>
         <div className={cn("containerPages", {
             darkPN: isDark
